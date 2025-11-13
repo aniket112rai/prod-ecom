@@ -38,7 +38,7 @@ const PaymentPage = () => {
       };
 
       const orderRes = await axios.post(
-        "http://localhost:3000/api/orders",
+        "https://prod-ecom-backend.onrender.com/api/orders",
         orderPayload,
         { withCredentials: true }
       );

@@ -10,7 +10,7 @@ const ManageProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/products", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/products", {
         withCredentials: true,
       });
       console.log("Fetched products:", data);
@@ -27,7 +27,7 @@ const ManageProducts = () => {
     // Note: Added a window.confirm for safety, as this is a destructive action.
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/products/${id}`, {
+        await axios.delete(`https://prod-ecom-backend.onrender.com/api/products/${id}`, {
           withCredentials: true,
         });
         fetchProducts();

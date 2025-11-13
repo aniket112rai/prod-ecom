@@ -13,7 +13,7 @@ const Home = () => {
     try {
       const params = new URLSearchParams(filters).toString();
       const { data } = await axios.get(
-        `http://localhost:3000/api/products?${params}`
+        `https://prod-ecom-backend.onrender.com/api/products?${params}`
       );
       setProducts(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -24,7 +24,7 @@ const Home = () => {
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/auth/me", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/auth/me", {
         withCredentials: true,
       });
       setUser(data);
@@ -118,7 +118,7 @@ const Home = () => {
                   <button
                     onClick={async () => {
                       await axios.post(
-                        "http://localhost:3000/api/auth/logout",
+                        "https://prod-ecom-backend.onrender.com/api/auth/logout",
                         {},
                         { withCredentials: true }
                       );

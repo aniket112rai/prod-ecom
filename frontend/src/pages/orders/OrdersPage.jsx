@@ -9,7 +9,7 @@ const OrdersPage = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/orders", {
+      const res = await axios.get("https://prod-ecom-backend.onrender.com/api/orders", {
         withCredentials: true,
       });
       setOrders(res.data);

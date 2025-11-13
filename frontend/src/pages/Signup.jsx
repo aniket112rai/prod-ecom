@@ -24,7 +24,7 @@ export default function SignUp() {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/register", form, {
+      const res = await axios.post("https://prod-ecom-backend.onrender.com/api/auth/register", form, {
         withCredentials: true, // send cookies
       });
       console.log("User registered:", res.data);

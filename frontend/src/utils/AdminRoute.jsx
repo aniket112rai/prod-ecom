@@ -10,7 +10,7 @@ export const AdminRoute = ({ children }) => {
   useEffect(() => {
     const checkAdmin = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/auth/me", {
+        const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/auth/me", {
           withCredentials: true, // send cookies automatically
         });
 

@@ -25,7 +25,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/auth/me", {
+        const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/auth/me", {
           withCredentials: true,
         });
         setCurrentUser(data);
@@ -40,7 +40,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:3000/api/products/${id}`, {
+        const { data } = await axios.get(`https://prod-ecom-backend.onrender.com/api/products/${id}`, {
           withCredentials: true,
         });
         setProduct(data);
@@ -56,7 +56,7 @@ const ProductDetails = () => {
   // ✅ Fetch reviews
   const fetchReviews = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/reviews/${id}`, {
+      const { data } = await axios.get(`https://prod-ecom-backend.onrender.com/api/reviews/${id}`, {
         withCredentials: true,
       });
       setReviews(data);
@@ -77,7 +77,7 @@ const ProductDetails = () => {
     try {
       setReviewLoading(true);
       await axios.post(
-        "http://localhost:3000/api/reviews",
+        "https://prod-ecom-backend.onrender.com/api/reviews",
         { productId: id, rating, comment: reviewText },
         { withCredentials: true }
       );
@@ -95,7 +95,7 @@ const ProductDetails = () => {
   const handleDeleteReview = async (reviewId) => {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
     try {
-      await axios.delete(`http://localhost:3000/api/reviews/${reviewId}`, {
+      await axios.delete(`https://prod-ecom-backend.onrender.com/api/reviews/${reviewId}`, {
         withCredentials: true,
       });
       setReviews((prev) => prev.filter((r) => r.id !== reviewId));

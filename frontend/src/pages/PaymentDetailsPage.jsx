@@ -11,7 +11,7 @@ const PaymentDetailsPage = () => {
     const fetchPayment = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3000/api/payments/${id}`,
+          `https://prod-ecom-backend.onrender.com/api/payments/${id}`,
           { withCredentials: true }
         );
         setPayment(data);

@@ -11,7 +11,7 @@ const ManageUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/users", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/users", {
         withCredentials: true,
       });
   

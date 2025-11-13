@@ -10,7 +10,7 @@ const ManageCategories = () => {
 
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/categories", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/categories", {
         withCredentials: true,
       });
       console.log("Fetched categories:", data);
@@ -25,7 +25,7 @@ const ManageCategories = () => {
   
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this category?")) {
-        await axios.delete(`http://localhost:3000/api/categories/${id}`, {
+        await axios.delete(`https://prod-ecom-backend.onrender.com/api/categories/${id}`, {
           withCredentials: true,
         });
         fetchCategories();

@@ -13,9 +13,9 @@ const CategoryForm = ({ fetchCategories, editingCategory, setEditingCategory }) 
     e.preventDefault();
     
     if (editingCategory) {
-      await axios.put(`http://localhost:3000/api/categories/${editingCategory.id}`, { name }, {withCredentials: true,});
+      await axios.put(`https://prod-ecom-backend.onrender.com/api/categories/${editingCategory.id}`, { name }, {withCredentials: true,});
     } else {
-      await axios.post("http://localhost:3000/api/categories", { name }, { withCredentials: true, });
+      await axios.post("https://prod-ecom-backend.onrender.com/api/categories", { name }, { withCredentials: true, });
     }
     setName("");
     setEditingCategory(null);

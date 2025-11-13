@@ -10,7 +10,7 @@ export const WishlistProvider = ({ children }) => {
   // Fetch wishlist once on mount
   const fetchWishlist = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/wishlist", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/wishlist", {
         withCredentials: true,
       });
       setWishlist(data);
@@ -29,7 +29,7 @@ export const WishlistProvider = ({ children }) => {
   const addToWishlist = async (productId) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/wishlist",
+        "https://prod-ecom-backend.onrender.com/api/wishlist",
         { productId },
         { withCredentials: true }
       );
@@ -43,7 +43,7 @@ export const WishlistProvider = ({ children }) => {
   const removeFromWishlist = async (wishlistId) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3000/api/wishlist/${wishlistId}`,
+        `https://prod-ecom-backend.onrender.com/api/wishlist/${wishlistId}`,
         { withCredentials: true }
       );
       setWishlist(data);

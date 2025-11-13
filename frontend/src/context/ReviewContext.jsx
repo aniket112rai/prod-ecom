@@ -11,7 +11,7 @@ export const ReviewProvider = ({ children }) => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/reviews/${productId}`,
+        `https://prod-ecom-backend.onrender.com/api/reviews/${productId}`,
         { withCredentials: true }
       );
       setReviews(data);
@@ -25,7 +25,7 @@ export const ReviewProvider = ({ children }) => {
   const addReview = async (productId, rating, comment) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3000/api/reviews`,
+        `https://prod-ecom-backend.onrender.com/api/reviews`,
         { productId, rating, comment },
         { withCredentials: true }
       );
@@ -38,7 +38,7 @@ export const ReviewProvider = ({ children }) => {
 
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/reviews/${id}`, {
+      await axios.delete(`https://prod-ecom-backend.onrender.com/api/reviews/${id}`, {
         withCredentials: true,
       });
       setReviews((prev) => prev.filter((r) => r.id !== id));

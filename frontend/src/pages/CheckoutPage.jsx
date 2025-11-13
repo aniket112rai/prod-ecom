@@ -13,7 +13,7 @@ const CheckoutPage = () => {
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/addresses", {
+        const res = await axios.get("https://prod-ecom-backend.onrender.com/api/addresses", {
           withCredentials: true,
         });
         setAddresses(res.data);
@@ -24,7 +24,7 @@ const CheckoutPage = () => {
 
     const fetchCart = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/cart", {
+        const res = await axios.get("https://prod-ecom-backend.onrender.com/api/cart", {
           withCredentials: true,
         });
         setCartItems(res.data.items || []);

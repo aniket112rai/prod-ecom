@@ -10,7 +10,7 @@ const AdminNav = () => {
 
     const handleLogout = async () => {
         try {
-          await axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true });
+          await axios.post("https://prod-ecom-backend.onrender.com/api/auth/logout", {}, { withCredentials: true });
         //   setIsAuthenticated(false); 
           navigate("/login");
         } catch (err) {

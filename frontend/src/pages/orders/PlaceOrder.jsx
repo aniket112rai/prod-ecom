@@ -14,7 +14,7 @@ const PlaceOrder = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/orders",
+        "https://prod-ecom-backend.onrender.com/api/orders",
         { items, addressId, paymentMethod },
         { withCredentials: true }
       );

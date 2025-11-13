@@ -9,7 +9,7 @@ const UpdateOrderStatus = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/api/orders/${orderId}/status`,
+        `https://prod-ecom-backend.onrender.com/api/orders/${orderId}/status`,
         { status },
         { withCredentials: true }
       );

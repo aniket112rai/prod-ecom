@@ -24,7 +24,7 @@ const AddressPage = () => {
 
   const fetchAddresses = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/addresses", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/addresses", {
         withCredentials: true,
       });
       setAddresses(data);
@@ -46,13 +46,13 @@ const AddressPage = () => {
       if (editing) {
         // Update existing address
         await axios.put(
-          `http://localhost:3000/api/addresses/${form.id}`,
+          `https://prod-ecom-backend.onrender.com/api/addresses/${form.id}`,
           form,
           { withCredentials: true }
         );
       } else {
         // Add new address
-        await axios.post("http://localhost:3000/api/addresses", form, {
+        await axios.post("https://prod-ecom-backend.onrender.com/api/addresses", form, {
           withCredentials: true,
         });
       }
@@ -79,7 +79,7 @@ const AddressPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this address?")) return;
     try {
-      await axios.delete(`http://localhost:3000/api/addresses/${id}`, {
+      await axios.delete(`https://prod-ecom-backend.onrender.com/api/addresses/${id}`, {
         withCredentials: true,
       });
       setAddresses((prev) => prev.filter((a) => a.id !== id));

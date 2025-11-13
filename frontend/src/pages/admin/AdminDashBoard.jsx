@@ -14,9 +14,9 @@ const AdminDashboard = () => {
       try {
         // Backend will validate the admin via cookie-based auth
         const [users, orders, products] = await Promise.all([
-          axios.get("http://localhost:3000/api/users", { withCredentials: true }),
-          axios.get("http://localhost:3000/api/orders/all", { withCredentials: true }),
-          axios.get("http://localhost:3000/api/products", { withCredentials: true }),
+          axios.get("https://prod-ecom-backend.onrender.com/api/users", { withCredentials: true }),
+          axios.get("https://prod-ecom-backend.onrender.com/api/orders/all", { withCredentials: true }),
+          axios.get("https://prod-ecom-backend.onrender.com/api/products", { withCredentials: true }),
         ]);
 
         setStats({

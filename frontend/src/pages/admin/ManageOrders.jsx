@@ -8,7 +8,7 @@ const ManageOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/orders/all", {
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/orders/all", {
         withCredentials: true,
       });
       console.log("Fetched orders:", data);
@@ -21,7 +21,7 @@ const ManageOrders = () => {
 
   const handleStatusChange = async (orderId, status) => {
     await axios.put(
-      `http://localhost:3000/api/orders/${orderId}/status`,
+      `https://prod-ecom-backend.onrender.com/api/orders/${orderId}/status`,
       { status },
       { withCredentials: true }
     );

@@ -14,7 +14,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("http://localhost:3000/api/cart");
+      const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/cart");
       setCart(data?.items || []);
     } catch (err) {
       console.error("Error fetching cart:", err);
@@ -26,7 +26,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productId, quantity = 1) => {
     try {
-      const { data } = await axios.post("http://localhost:3000/api/cart", {
+      const { data } = await axios.post("https://prod-ecom-backend.onrender.com/api/cart", {
         productId,
         quantity,
       });
@@ -38,7 +38,7 @@ export const CartProvider = ({ children }) => {
 
   const updateCartItem = async (itemId, quantity) => {
     try {
-      const { data } = await axios.put(`http://localhost:3000/api/cart/${itemId}`, {
+      const { data } = await axios.put(`https://prod-ecom-backend.onrender.com/api/cart/${itemId}`, {
         quantity,
       });
       setCart(data?.items || []);
@@ -49,7 +49,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (itemId) => {
     try {
-      const { data } = await axios.delete(`http://localhost:3000/api/cart/${itemId}`);
+      const { data } = await axios.delete(`https://prod-ecom-backend.onrender.com/api/cart/${itemId}`);
       setCart(data?.items || []);
     } catch (err) {
       console.error("Error removing cart item:", err);

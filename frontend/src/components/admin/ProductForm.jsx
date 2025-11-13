@@ -23,7 +23,7 @@ const ProductForm = ({ fetchProducts, editingProduct, setEditingProduct }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/categories", {
+        const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/categories", {
           withCredentials: true,
         });
         setCategories(data.categories || data);
@@ -43,12 +43,12 @@ const ProductForm = ({ fetchProducts, editingProduct, setEditingProduct }) => {
     try {
       if (editingProduct) {
         await axios.put(
-          `http://localhost:3000/api/products/${editingProduct.id}`,
+          `https://prod-ecom-backend.onrender.com/api/products/${editingProduct.id}`,
           form,
           { withCredentials: true }
         );
       } else {
-        await axios.post("http://localhost:3000/api/products", form, {
+        await axios.post("https://prod-ecom-backend.onrender.com/api/products", form, {
           withCredentials: true,
         });
       }
