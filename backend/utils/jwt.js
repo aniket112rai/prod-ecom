@@ -1,30 +1,25 @@
-
 import jwt from "jsonwebtoken";
 
-/**
- * authMiddleware checks authentication and optionally role.
- * @param {string} [requiredRole] - pass "admin" to restrict access
- */
-export const authMiddleware = (requiredRole) => async (req, res, next) => {
-  try {
-    const token = req.cookies.token; 
-    if (!token) {
-      return res.status(401).json({ message: "Not authenticated" });
-    }
-      
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
-    req.role = decoded.role; 
+export const createToken = (user) => {
+  return jwt.sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
+};
 
-    
-    if (requiredRole && decoded.role !== requiredRole) {
-      return res.status(403).json({ message: "Access denied" });
-    }
-    
-    next();
-  } catch (err) {
-    console.error(err);
-     
-    res.status(401).json({ message: "Invalid token" });
-  }
+export const sendToken = (res, user) => {
+  const token = createToken(user);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  res.json({
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+    token,
+  });
 };

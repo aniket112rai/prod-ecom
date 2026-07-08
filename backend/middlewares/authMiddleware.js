@@ -1,8 +1,6 @@
 
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 /**
  * authMiddleware checks authentication and optionally role.
  * @param {string} [requiredRole] - pass "admin" to restrict access
@@ -14,7 +12,7 @@ export const authMiddleware = (requiredRole) => async (req, res, next) => {
       return res.status(401).json({ message: "Not authenticated" });
     }
       
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded.userId;
     req.role = decoded.role; 
 
