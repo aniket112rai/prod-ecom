@@ -1,29 +1,36 @@
 // frontend/src/context/CartContext.jsx
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import axios from "axios";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // ✅ Automatically send cookies with every request
   axios.defaults.withCredentials = true;
 
-  const fetchCart = async () => {
+  const clearCart = useCallback(() => {
+    setCart([]);
+    setLoading(false);
+  }, []);
+
+  const fetchCart = useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await axios.get("https://prod-ecom-backend.onrender.com/api/cart");
       setCart(data?.items || []);
     } catch (err) {
-      console.error("Error fetching cart:", err);
       setCart([]);
+      if (err.response?.status !== 401) {
+        console.error("Error fetching cart:", err);
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const addToCart = async (productId, quantity = 1) => {
     try {
@@ -33,6 +40,10 @@ export const CartProvider = ({ children }) => {
       });
       setCart(data?.items || []);
     } catch (err) {
+      if (err.response?.status === 401) {
+        clearCart();
+        return;
+      }
       console.error("Error adding to cart:", err);
     }
   };
@@ -44,6 +55,10 @@ export const CartProvider = ({ children }) => {
       });
       setCart(data?.items || []);
     } catch (err) {
+      if (err.response?.status === 401) {
+        clearCart();
+        return;
+      }
       console.error("Error updating cart item:", err);
     }
   };
@@ -53,13 +68,13 @@ export const CartProvider = ({ children }) => {
       const { data } = await axios.delete(`https://prod-ecom-backend.onrender.com/api/cart/${itemId}`);
       setCart(data?.items || []);
     } catch (err) {
+      if (err.response?.status === 401) {
+        clearCart();
+        return;
+      }
       console.error("Error removing cart item:", err);
     }
   };
-
-  useEffect(() => {
-    fetchCart();
-  }, []);
 
   return (
     <CartContext.Provider
@@ -67,6 +82,7 @@ export const CartProvider = ({ children }) => {
         cart,
         loading,
         fetchCart,
+        clearCart,
         addToCart,
         updateCartItem,
         removeFromCart,

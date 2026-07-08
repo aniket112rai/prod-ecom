@@ -1,11 +1,15 @@
 // frontend/src/pages/WishlistPage.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { useWishlist } from "../context/WishlistContext";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
 const WishlistPage = () => {
-  const { wishlist, loading } = useWishlist();
+  const { wishlist, loading, fetchWishlist } = useWishlist();
+
+  useEffect(() => {
+    fetchWishlist();
+  }, [fetchWishlist]);
 
   // 1. Pretty Loading State
   if (loading) {

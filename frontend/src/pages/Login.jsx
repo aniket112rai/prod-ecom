@@ -2,9 +2,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { fetchCart } = useCart();
+  const { fetchWishlist } = useWishlist();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +29,8 @@ const Login = () => {
       
       // login successful, redirect to home or products page
       console.log(data.user.role);
+      await Promise.all([fetchCart(), fetchWishlist()]);
+
       if (data.user.role === "admin") {
         navigate("/admin");
       } else {

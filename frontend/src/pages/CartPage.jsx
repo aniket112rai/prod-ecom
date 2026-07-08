@@ -1,11 +1,15 @@
 // frontend/src/pages/CartPage.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import CartItem from "../components/CartItem";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const { cart, loading } = useCart();
+  const { cart, loading, fetchCart } = useCart();
+
+  useEffect(() => {
+    fetchCart();
+  }, [fetchCart]);
 
   // 1. Loading State
   if (loading)
