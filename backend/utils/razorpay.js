@@ -2,8 +2,8 @@ import crypto from "crypto";
 import Razorpay from "razorpay";
 
 const getRazorpayConfig = () => {
-  const keyId = process.env.RAZORPAY_API_KEY || process.env.RAZORPAY_KEY_ID;
-  const keySecret = process.env.RAZORPAY_SECRET || process.env.RAZORPAY_KEY_SECRET;
+  const keyId = process.env.RAZORPAY_API_KEY ;
+  const keySecret = process.env.RAZORPAY_SECRET;
 
   if (!keyId || !keySecret) {
     throw new Error("Razorpay credentials are not configured");

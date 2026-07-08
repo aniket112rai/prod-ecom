@@ -15,15 +15,11 @@ import cors from 'cors';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "https://prod-ecom-frontend.onrender.com",
-  "http://localhost:5173",
-].filter(Boolean);
+const PORT = process.env.PORT ;
+
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: "https://prod-ecom-frontend.onrender.com",
     credentials: true,
   }));
 app.use(express.json());
