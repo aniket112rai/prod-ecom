@@ -1,6 +1,6 @@
+import "dotenv/config";
 import express from "express";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -13,13 +13,22 @@ import addressRoutes from "./routes/addressRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js"; 
 import cors from 'cors';
 
-dotenv.config();
 const app = express();
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 3000;
+const allowedOrigins = (process.env.CORS_ORIGIN || process.env.FRONTEND_URL || "https://prod-ecom-frontend.onrender.com,http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 
 app.use(cors({
-    origin: "https://prod-ecom-frontend.onrender.com",
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   }));
 app.use(express.json());
