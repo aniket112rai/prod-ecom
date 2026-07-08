@@ -15,8 +15,15 @@ import cors from 'cors';
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 3000;
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "https://prod-ecom-frontend.onrender.com",
+  "http://localhost:5173",
+].filter(Boolean);
+
 app.use(cors({
-    origin: "https://prod-ecom-frontend.onrender.com",
+    origin: allowedOrigins,
     credentials: true,
   }));
 app.use(express.json());
@@ -34,5 +41,10 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/addresses", addressRoutes); 
 app.use("/api/payments", paymentRoutes);
 
+app.get("/", (_req, res) => {
+  res.send("API is running");
+});
 
-app.listen(3000);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
